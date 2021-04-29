@@ -48,20 +48,11 @@ namespace MISA.CukCuk.Core.Service
             foreach (var property in properties)
             {
                 var requiredAttribute = property.GetCustomAttributes(typeof(MISARequired), true);
-
                 if(requiredAttribute.Length > 0)
                 {
                     var propertyValue = property.GetValue(entity);
                     if (string.IsNullOrEmpty(propertyValue.ToString()))
                     {
-                        //if(property.Name == $"{tableName}Id")
-                        //{
-                        //    //TODO: BUG Khi POST 1 id Empty.
-                        //    //property.SetValue(entity, ("8d246939-a8a5-11eb-8a1f-00163e047e89"));
-
-                        //    var id = JsonConvert.DeserializeObject("8d246939-a8a5-11eb-8a1f-00163e047e89");
-                        //    property.SetValue(entity, id);
-                        //}
                         var msgError = (requiredAttribute[0] as MISARequired).MsgError;
                         if (string.IsNullOrEmpty(msgError))
                         {
@@ -90,6 +81,18 @@ namespace MISA.CukCuk.Core.Service
                     }
                 }
             }
+
+
+            //Check trùng mã đối tượng -- Check động : 
+            //TODO: Check động chưa dùng đến vì customerGroup chưa cần check trùng.
+            //var entityCode = typeof(MISAEntity).GetProperty($"{tableName}Code").GetValue(entity);
+            //var entityId = typeof(MISAEntity).GetProperty($"{tableName}Id").GetValue(entity);
+            //var IsCheckHttpPostOrPut = _baseRepository.CheckEntityCodeExist(entityCode.ToString(), Guid.Parse(entityId.ToString()), http);
+            //if (IsCheckHttpPostOrPut == true)
+            //{
+            //    throw new CustomExceptions("Mã khách hàng đã tồn tại trên hệ thống!");
+            //}
+
             CustomValidate(entity, http);
         }
 

@@ -24,7 +24,7 @@ namespace MISA.CukCuk.Core.Service
             var customerId = customer.CustomerId;
             var phoneNumber = customer.PhoneNumber;
             var IsCheckHttpPostOrPut = _customerRepository.CheckCustomerCodeExist(customerCode, customerId, http);
-            if(IsCheckHttpPostOrPut == true)
+            if (IsCheckHttpPostOrPut == true)
             {
                 throw new CustomExceptions("Mã khách hàng đã tồn tại trên hệ thống!");
             }

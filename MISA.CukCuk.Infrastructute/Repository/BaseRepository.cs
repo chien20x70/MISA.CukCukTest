@@ -8,6 +8,7 @@ using System.Data;
 using Microsoft.Extensions.Configuration;
 using MySqlConnector;
 using Dapper;
+using MISA.CukCuk.Core.Enums;
 
 namespace MISA.CukCuk.Infrastructute.Repository
 {
@@ -91,6 +92,38 @@ namespace MISA.CukCuk.Infrastructute.Repository
                 dynamicParameters.Add($"@{tableName}Id", entityId);
                 var rowEffects = dbConnection.Execute(sql, dynamicParameters, commandType: CommandType.StoredProcedure);
                 return rowEffects;
+            }
+        }
+
+        /// <summary>
+        /// Check trùng mã đối tượng
+        /// </summary>
+        /// <param name="entityCode"></param>
+        /// <param name="entityId"></param>
+        /// <param name="http"></param>
+        /// <returns></returns>
+        /// Created by: NXChien 29/04/2021
+        /// Chưa cần dùng đến do customerGroup chưa cần.
+        public bool CheckEntityCodeExist(string entityCode, Guid entityId, HTTPType http)
+        {
+            using (dbConnection = new MySqlConnection(connectionString))
+            {
+                var sqlCommandDuplicate = "";
+                DynamicParameters parameters = new DynamicParameters();
+                if (http == HTTPType.POST) // post
+                {
+                    sqlCommandDuplicate = $"Proc_Check{tableName}CodeExists";
+                    parameters.Add($"@m_{tableName}Code", entityCode);
+                }
+                else if (http == HTTPType.PUT)  //put
+                {
+                    sqlCommandDuplicate = $"Proc_H_Check{tableName}CodeExists";
+                    parameters.Add($"@{tableName}Code", entityCode);
+                    parameters.Add($"@{tableName}Id", entityId);
+                }
+                var check = dbConnection.QueryFirstOrDefault<bool>
+                    (sqlCommandDuplicate, param: parameters, commandType: CommandType.StoredProcedure);
+                return check;
             }
         }
     }

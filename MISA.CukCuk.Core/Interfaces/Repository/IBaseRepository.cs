@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MISA.CukCuk.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,5 +50,7 @@ namespace MISA.CukCuk.Core.Interfaces.Repository
         /// <returns></returns>
         /// Created By: 29/04/2021
         public IEnumerable<MISAEntity> GetEntityFilter(int pageSize, int pageIndex);
+
+        public bool CheckEntityCodeExist(string entityCode, Guid entityId, HTTPType http);
     }
 }

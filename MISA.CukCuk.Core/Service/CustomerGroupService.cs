@@ -14,7 +14,7 @@ namespace MISA.CukCuk.Core.Service
         ICustomerGroupRepository _customerGroupRepository;
         public CustomerGroupService(ICustomerGroupRepository customerGroupRepository):base(customerGroupRepository)
         {
-
+            _customerGroupRepository = customerGroupRepository;
         }
     }
 }
