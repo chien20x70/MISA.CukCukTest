@@ -26,12 +26,14 @@ namespace MISA.CukCuk.Core.Service
             var IsCheckHttpPostOrPut = _customerRepository.CheckCustomerCodeExist(customerCode, customerId, http);
             if (IsCheckHttpPostOrPut == true)
             {
-                throw new CustomExceptions("Mã khách hàng đã tồn tại trên hệ thống!");
+                throw new CustomExceptions(Properties.Resources.Msg_Code_Exist);
             }
+
+            //TODO: Chưa check PhoneNumber theo dạng PUT OR POST
             var phone = _customerRepository.CheckPhoneNumberExist(phoneNumber);
             if (phone)
             {
-                throw new CustomExceptions("Số điện thoại đã tồn tại trên hệ thống!");
+                throw new CustomExceptions(Properties.Resources.Msg_Phone_Exist);
             }
         }
     }

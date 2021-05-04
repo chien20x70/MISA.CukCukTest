@@ -9,7 +9,7 @@ namespace MISA.CukCuk.Core.Entities
 {
     public class Customer
     {
-        [MISARequired("")]
+        //[MISARequired("")]
         public Guid CustomerId { get; set; }
         [MISARequired("")]
         [MISAMaxLength(20,"")]

@@ -51,6 +51,6 @@ namespace MISA.CukCuk.Core.Interfaces.Repository
         /// Created By: 29/04/2021
         public IEnumerable<MISAEntity> GetEntityFilter(int pageSize, int pageIndex);
 
-        public bool CheckEntityCodeExist(string entityCode, Guid entityId, HTTPType http);
+        //public bool CheckEntityCodeExist(string entityCode, Guid entityId, HTTPType http);
     }
 }

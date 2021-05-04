@@ -33,22 +33,14 @@ namespace MISA.CukCukTest.Base.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            try
+            var entities = _baseRepository.GetAll();
+            if (entities.Count() > 0)
             {
-                var entities = _baseRepository.GetAll();
-                if(entities.Count() > 0)
-                {
-                    return Ok(entities);
-                }
-                else
-                {
-                    return NoContent();
-                }
+                return Ok(entities);
             }
-            catch (Exception)
+            else
             {
-
-                throw;
+                return NoContent();
             }
         }
 
@@ -61,24 +53,19 @@ namespace MISA.CukCukTest.Base.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(Guid id)
         {
-            try
-            {
-                var entity = _baseRepository.GetById(id);
-                if(entity != null)
-                {
-                    return Ok(entity);
-                }
-                else
-                {
-                    return NoContent();
-                }
-            }
-            catch (Exception)
-            {
 
-                throw;
+            var entity = _baseRepository.GetById(id);
+            if (entity != null)
+            {
+                return Ok(entity);
+            }
+            else
+            {
+                return NoContent();
             }
         }
+
+
 
         /// <summary>
         /// Thêm 1 đối tượng 
@@ -89,22 +76,14 @@ namespace MISA.CukCukTest.Base.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] MISAEntity entity)
         {
-            try
+            var rowAffects = _baseService.Insert(entity);
+            if (rowAffects > 0)
             {
-                var rowAffects = _baseService.Insert(entity);
-                if(rowAffects > 0)
-                {
-                    return StatusCode(201, rowAffects);
-                }
-                else
-                {
-                    return NoContent();
-                }
+                return StatusCode(201, rowAffects);
             }
-            catch (Exception)
+            else
             {
-
-                throw;
+                return NoContent();
             }
         }
 
@@ -141,8 +120,6 @@ namespace MISA.CukCukTest.Base.Controllers
             {
                 return NoContent();
             }
-            
-            
         }
 
         /// <summary>
@@ -154,22 +131,14 @@ namespace MISA.CukCukTest.Base.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
-            try
+            var rowAffects = _baseService.Delete(id);
+            if (rowAffects > 0)
             {
-                var rowAffects = _baseService.Delete(id);
-                if (rowAffects > 0)
-                {
-                    return Ok("Xoas thanh cong");
-                }
-                else
-                {
-                    return NoContent();
-                }
+                return Ok("Xoas thanh cong");
             }
-            catch (Exception)
+            else
             {
-
-                throw;
+                return NoContent();
             }
         }
 
@@ -183,21 +152,27 @@ namespace MISA.CukCukTest.Base.Controllers
         [HttpGet("Paging")]
         public IActionResult Filters(int pageSize, int pageIndex)
         {
-            try
+
+            //Lấy tất cả bản ghi trong DB
+            var limit = _baseRepository.GetAll().Count();
+            //Kiểm tra nếu số khách trên trang hoặc vị trí trang < 1 thì trả về BadRequest
+            if (pageSize < 1 || pageIndex < 1)
             {
-                var entity = _baseService.GetEntityFilter(pageSize, pageIndex);
-                if (entity != null)
-                {
-                    return Ok(entity);
-                }
-                else
-                {
-                    return NoContent();
-                }
+                return BadRequest();
             }
-            catch (Exception)
+            // Kiểm tra nếu số khách/trang * vị trí trang < tổng khách + số khách/trang thì trả về NoContent.
+            else if (pageSize * pageIndex >= (limit + pageSize))      //limit =245 total =250        245+10
             {
-                throw;
+                return NoContent();
+            }
+            var entity = _baseService.GetEntityFilter(pageSize, pageIndex);
+            if (entity != null)
+            {
+                return Ok(entity);
+            }
+            else
+            {
+                return NoContent();
             }
         }
     }

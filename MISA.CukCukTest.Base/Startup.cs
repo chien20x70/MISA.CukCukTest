@@ -14,6 +14,7 @@ using MISA.CukCuk.Core.Interfaces.Repository;
 using MISA.CukCuk.Core.Interfaces.Service;
 using MISA.CukCuk.Core.Service;
 using MISA.CukCuk.Infrastructute.Repository;
+using MISA.CukCukTest.Base.MiddleWare;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -83,6 +84,7 @@ namespace MISA.CukCukTest.Base
             }
 
             app.UseHttpsRedirection();
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
             app.UseExceptionHandler(c => c.Run(async context =>
             {
                 var exception = context.Features.Get<IExceptionHandlerPathFeature>().Error;
@@ -118,6 +120,12 @@ namespace MISA.CukCukTest.Base
             app.UseRouting();
 
             app.UseAuthorization();
+            
+            app.UseCors(c =>
+            {
+                c.AllowAnyOrigin();
+                c.AllowAnyMethod();
+            });
 
             app.UseEndpoints(endpoints =>
             {

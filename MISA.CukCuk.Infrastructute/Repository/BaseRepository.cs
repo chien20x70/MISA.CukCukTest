@@ -54,7 +54,7 @@ namespace MISA.CukCuk.Infrastructute.Repository
                 DynamicParameters dynamicParameters = new DynamicParameters();
                 dynamicParameters.Add("@m_PageIndex", pageIndex);
                 dynamicParameters.Add("@m_PageSize", pageSize);
-                var entities = dbConnection.Query<MISAEntity>(sql, commandType: CommandType.StoredProcedure);
+                var entities = dbConnection.Query<MISAEntity>(sql, dynamicParameters,commandType: CommandType.StoredProcedure);
                 return entities;
             }
         }
@@ -64,8 +64,6 @@ namespace MISA.CukCuk.Infrastructute.Repository
             using (dbConnection = new MySqlConnection(connectionString))
             {
                 var sql = $"Proc_Insert{tableName}";
-                //DynamicParameters dynamicParameters = new DynamicParameters();
-                //dynamicParameters.Add($"@{tableName}Id", entityId);
                 var rowEffects = dbConnection.Execute(sql, entity, commandType: CommandType.StoredProcedure);
                 return rowEffects;
             }
@@ -76,8 +74,6 @@ namespace MISA.CukCuk.Infrastructute.Repository
             using (dbConnection = new MySqlConnection(connectionString))
             {
                 var sql = $"Proc_Update{tableName}";
-                //DynamicParameters dynamicParameters = new DynamicParameters();
-                //dynamicParameters.Add($"@{tableName}Id", entityId);
                 var rowEffects = dbConnection.Execute(sql, entity, commandType: CommandType.StoredProcedure);
                 return rowEffects;
             }
@@ -87,7 +83,7 @@ namespace MISA.CukCuk.Infrastructute.Repository
         {
             using (dbConnection = new MySqlConnection(connectionString))
             {
-                var sql = $"Proc_Insert{tableName}";
+                var sql = $"Proc_Delete{tableName}";
                 DynamicParameters dynamicParameters = new DynamicParameters();
                 dynamicParameters.Add($"@{tableName}Id", entityId);
                 var rowEffects = dbConnection.Execute(sql, dynamicParameters, commandType: CommandType.StoredProcedure);
@@ -98,33 +94,33 @@ namespace MISA.CukCuk.Infrastructute.Repository
         /// <summary>
         /// Check trùng mã đối tượng
         /// </summary>
-        /// <param name="entityCode"></param>
-        /// <param name="entityId"></param>
-        /// <param name="http"></param>
+        /// <param name="entityCode">Mã code của đối tượng</param>
+        /// <param name="entityId">Mã ID của đối tượng</param>
+        /// <param name="http">Phương thức POST OR PUT</param>
         /// <returns></returns>
         /// Created by: NXChien 29/04/2021
         /// Chưa cần dùng đến do customerGroup chưa cần.
-        public bool CheckEntityCodeExist(string entityCode, Guid entityId, HTTPType http)
-        {
-            using (dbConnection = new MySqlConnection(connectionString))
-            {
-                var sqlCommandDuplicate = "";
-                DynamicParameters parameters = new DynamicParameters();
-                if (http == HTTPType.POST) // post
-                {
-                    sqlCommandDuplicate = $"Proc_Check{tableName}CodeExists";
-                    parameters.Add($"@m_{tableName}Code", entityCode);
-                }
-                else if (http == HTTPType.PUT)  //put
-                {
-                    sqlCommandDuplicate = $"Proc_H_Check{tableName}CodeExists";
-                    parameters.Add($"@{tableName}Code", entityCode);
-                    parameters.Add($"@{tableName}Id", entityId);
-                }
-                var check = dbConnection.QueryFirstOrDefault<bool>
-                    (sqlCommandDuplicate, param: parameters, commandType: CommandType.StoredProcedure);
-                return check;
-            }
-        }
+        //public bool CheckEntityCodeExist(string entityCode, Guid entityId, HTTPType http)
+        //{
+        //    using (dbConnection = new MySqlConnection(connectionString))
+        //    {
+        //        var sqlCommandDuplicate = "";
+        //        DynamicParameters parameters = new DynamicParameters();
+        //        if (http == HTTPType.POST) // post
+        //        {
+        //            sqlCommandDuplicate = $"Proc_Check{tableName}CodeExists";
+        //            parameters.Add($"@m_{tableName}Code", entityCode);
+        //        }
+        //        else if (http == HTTPType.PUT)  //put
+        //        {
+        //            sqlCommandDuplicate = $"Proc_H_Check{tableName}CodeExists";
+        //            parameters.Add($"@{tableName}Code", entityCode);
+        //            parameters.Add($"@{tableName}Id", entityId);
+        //        }
+        //        var check = dbConnection.QueryFirstOrDefault<bool>
+        //            (sqlCommandDuplicate, param: parameters, commandType: CommandType.StoredProcedure);
+        //        return check;
+        //    }
+        //}
     }
 }

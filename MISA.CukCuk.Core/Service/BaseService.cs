@@ -44,15 +44,24 @@ namespace MISA.CukCuk.Core.Service
 
         private void Validate(MISAEntity entity, HTTPType http)
         {
+            // Lấy ra tất cả property của đối tượng
             var properties = typeof(MISAEntity).GetProperties();
             foreach (var property in properties)
             {
+                // Lấy ra attribute của đối tượng
                 var requiredAttribute = property.GetCustomAttributes(typeof(MISARequired), true);
                 if(requiredAttribute.Length > 0)
                 {
+                    // Lấy ra giá trị của property
                     var propertyValue = property.GetValue(entity);
+                    // Kiểm tra nếu giá trị null thì gán thành empty.
+                    if(propertyValue == null)
+                    {
+                        propertyValue = "";
+                    }
                     if (string.IsNullOrEmpty(propertyValue.ToString()))
                     {
+                        // Lấy ra message lỗi của attribute.
                         var msgError = (requiredAttribute[0] as MISARequired).MsgError;
                         if (string.IsNullOrEmpty(msgError))
                         {
