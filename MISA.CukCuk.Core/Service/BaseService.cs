@@ -5,6 +5,7 @@ using MISA.CukCuk.Core.Interfaces.Repository;
 using MISA.CukCuk.Core.Interfaces.Service;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace MISA.CukCuk.Core.Service
 {
@@ -112,6 +113,41 @@ namespace MISA.CukCuk.Core.Service
                         throw new CustomExceptions(msgError);
                     }
                 }
+                // Kiểm tra email
+                var emailAttribute = property.GetCustomAttributes(typeof(MISAEmail), true);
+                if (emailAttribute.Length > 0)
+                {
+                    // Lấy giá trị email
+                    var emailValue = property.GetValue(entity);
+                    // Khởi tạo regex và kiểm tra
+                    Regex regex = new Regex(Properties.Resources.Regex_String);
+                    if (!regex.IsMatch(emailValue.ToString()))
+                    {
+
+                        var msgErrorEmail = (emailAttribute[0] as MISAEmail).MsgErrorEmail;
+                        if (string.IsNullOrEmpty(msgErrorEmail.ToString()))
+                        {
+                            msgErrorEmail = $"{property.Name} không đúng định dạng!";
+                        }
+                        throw new CustomExceptions(msgErrorEmail);
+                    }
+                }
+
+                /// Kiểm tra số điện thoại
+                ///var phoneAttribute = property.GetCustomAttributes(typeof(MISAPhone), true);
+                ///if (phoneAttribute.Length > 0)
+                ///{
+                ///    var phoneValue = property.GetValue(entity);
+                ///    if (!int.TryParse(phoneValue.ToString(), out int n))
+                ///    {
+                ///        var msgErrorPhone = (phoneAttribute[0] as MISAPhone).MsgErrorPhone;
+                ///        if (string.IsNullOrEmpty(msgErrorPhone))
+                ///        {
+                ///            msgErrorPhone = $"{property.Name} phải là số!";
+                ///        }
+                ///        throw new CustomExceptions(msgErrorPhone);
+                ///    }
+                ///}
             }
 
             //TODO: Check động chưa dùng đến vì customerGroup chưa cần check trùng.

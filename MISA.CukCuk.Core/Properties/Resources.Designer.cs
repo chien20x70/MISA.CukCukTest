@@ -77,5 +77,14 @@ namespace MISA.CukCuk.Core.Properties {
                 return ResourceManager.GetString("Msg_Phone_Exist", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \A(?:[a-z0-9!#$%&amp;&apos;*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;&apos;*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z.
+        /// </summary>
+        public static string Regex_String {
+            get {
+                return ResourceManager.GetString("Regex_String", resourceCulture);
+            }
+        }
     }
 }

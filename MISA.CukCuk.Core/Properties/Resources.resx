@@ -123,4 +123,7 @@
   <data name="Msg_Phone_Exist" xml:space="preserve">
     <value>Số điện thoại đã tồn tại trên hệ thống!</value>
   </data>
+  <data name="Regex_String" xml:space="preserve">
+    <value>\A(?:[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z</value>
+  </data>
 </root>

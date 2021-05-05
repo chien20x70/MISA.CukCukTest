@@ -61,6 +61,8 @@ namespace MISA.CukCuk.Core.Entities
         /// <summary>
         /// Email.
         /// </summary>
+        [MISARequired("")]
+        [MISAEmail("")]
         public string Email { get; set; }
 
         /// <summary>

@@ -33,4 +33,24 @@ namespace MISA.CukCuk.Core.CustomAttribute
             MsgError_MaxLength = msgError_MaxLength;
         }
     }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class MISAEmail : Attribute
+    {
+        public string MsgErrorEmail;
+        public MISAEmail(string msgErrorEmail)
+        {
+            MsgErrorEmail = msgErrorEmail;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class MISAPhone : Attribute
+    {
+        public string MsgErrorPhone;
+        public MISAPhone(string msgErrorPhone)
+        {
+            MsgErrorPhone = msgErrorPhone;
+        }
+    }
 }
