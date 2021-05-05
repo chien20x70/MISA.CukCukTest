@@ -82,11 +82,7 @@ namespace MISA.CukCuk.Core.Service
                     // Lấy ra giá trị của property
                     var propertyValue = property.GetValue(entity);
                     // Kiểm tra nếu giá trị null thì gán thành empty.
-                    if (propertyValue == null)
-                    {
-                        propertyValue = "";
-                    }
-                    if (string.IsNullOrEmpty(propertyValue.ToString()))
+                    if (propertyValue == null || string.IsNullOrEmpty(propertyValue.ToString()))
                     {
                         // Lấy ra message lỗi của attribute.
                         var msgError = (requiredAttribute[0] as MISARequired).MsgError;
@@ -118,18 +114,15 @@ namespace MISA.CukCuk.Core.Service
                 }
             }
 
-
-
             //TODO: Check động chưa dùng đến vì customerGroup chưa cần check trùng.
-            /*Check trùng mã đối tượng -- Check động : 
-            var entityCode = typeof(MISAEntity).GetProperty($"{tableName}Code").GetValue(entity);
-            var entityId = typeof(MISAEntity).GetProperty($"{tableName}Id").GetValue(entity);
-            var IsCheckHttpPostOrPut = _baseRepository.CheckEntityCodeExist(entityCode.ToString(), Guid.Parse(entityId.ToString()), http);
-            if (IsCheckHttpPostOrPut == true)
-            {
-                throw new CustomExceptions("Mã khách hàng đã tồn tại trên hệ thống!");
-            }*/
-
+            ///Check trùng mã đối tượng -- Check động : 
+            ///var entityCode = typeof(MISAEntity).GetProperty($"{tableName}Code").GetValue(entity);
+            ///var entityId = typeof(MISAEntity).GetProperty($"{tableName}Id").GetValue(entity);
+            ///var IsCheckHttpPostOrPut = _baseRepository.CheckEntityCodeExist(entityCode.ToString(), Guid.Parse(entityId.ToString()), http);
+            ///if (IsCheckHttpPostOrPut == true)
+            ///{
+            ///throw new CustomExceptions("Mã khách hàng đã tồn tại trên hệ thống!");
+            ///}
 
             // Validate dữ liệu riêng tường đối tượng
             CustomValidate(entity, http);
