@@ -25,7 +25,7 @@ namespace MISA.CukCuk.Infrastructute.Repository
         /// Check CustomerCode đã tồn tại hay chưa
         /// </summary>
         /// <param name="customerCode">Mã khách hàng</param>
-        /// <returns></returns>
+        /// <returns>true or false</returns>
         /// CREATED BY: NXCHIEN 27/04/2021
         public bool CheckCustomerCodeExist(string customerCode, Guid customerId, HTTPType http)
         {

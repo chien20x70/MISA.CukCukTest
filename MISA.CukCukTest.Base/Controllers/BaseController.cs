@@ -28,7 +28,10 @@ namespace MISA.CukCukTest.Base.Controllers
         /// <summary>
         /// Lấy tất cả đối tượng
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        ///     -Thành công: 200 và Mảng danh sách đối tượng lấy được
+        ///     - NoContent: 204
+        /// </returns>
         /// CreatedBy: NXChien (28/04/2021)
         [HttpGet]
         public IActionResult Get()
@@ -71,7 +74,9 @@ namespace MISA.CukCukTest.Base.Controllers
         /// Thêm 1 đối tượng 
         /// </summary>
         /// <param name="entity">đối tượng cần thêm</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     -Thành công: 201 và số dòng trong bảng trong DB bị ảnh hưởng
+        /// </returns>
         /// CreatedBy: NXChien (21/04/2021)
         [HttpPost]
         public IActionResult Post([FromBody] MISAEntity entity)
@@ -126,7 +131,10 @@ namespace MISA.CukCukTest.Base.Controllers
         /// Xóa 1 đối tượng
         /// </summary>
         /// <param name="id">Mã đối tượng</param>
-        /// <returns></returns>
+        /// <returns>
+        ///     - Thành công: 200 và thông báo xóa thành công
+        ///     - NoContent: 204
+        /// </returns>
         /// CreatedBy: NXChien (21/04/2021)
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)

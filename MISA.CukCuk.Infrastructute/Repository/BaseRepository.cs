@@ -24,6 +24,11 @@ namespace MISA.CukCuk.Infrastructute.Repository
             connectionString = _configuration.GetConnectionString("ConnectionDB");
         }
 
+        /// <summary>
+        /// Lấy danh sách tất cả các đối tượng
+        /// </summary>
+        /// <returns>Mảng danh sách đối tượng</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public IEnumerable<MISAEntity> GetAll()
         {
             using (dbConnection = new MySqlConnection(connectionString))
@@ -34,6 +39,12 @@ namespace MISA.CukCuk.Infrastructute.Repository
             }
         }
 
+        /// <summary>
+        /// Lấy 1 đối tượng theo ID
+        /// </summary>
+        /// <param name="entityId">Mã ID của đối tượng</param>
+        /// <returns>1 đối tượng có id là entityId</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public MISAEntity GetById(Guid entityId)
         {
             using (dbConnection = new MySqlConnection(connectionString))
@@ -46,6 +57,13 @@ namespace MISA.CukCuk.Infrastructute.Repository
             }
         }
 
+        /// <summary>
+        /// Phân trang đối tượng
+        /// </summary>
+        /// <param name="pageSize">số đối tượng trên 1 trang</param>
+        /// <param name="pageIndex">Trang số bao nhiêu</param>
+        /// <returns>Mảng danh sách đối tượng</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public IEnumerable<MISAEntity> GetEntityFilter(int pageSize, int pageIndex)
         {
             using (dbConnection = new MySqlConnection(connectionString))
@@ -59,6 +77,12 @@ namespace MISA.CukCuk.Infrastructute.Repository
             }
         }
 
+        /// <summary>
+        /// Thêm mới 1 đối tượng
+        /// </summary>
+        /// <param name="entity">Đối tượng cần thêm mới</param>
+        /// <returns>số dòng trong bảng trong DB bị ảnh hưởng</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public int Insert(MISAEntity entity)
         {
             using (dbConnection = new MySqlConnection(connectionString))
@@ -69,6 +93,12 @@ namespace MISA.CukCuk.Infrastructute.Repository
             }
         }
 
+        /// <summary>
+        /// Sửa 1 đối tượng 
+        /// </summary>
+        /// <param name="entity">Đối tượng cần sửa</param>
+        /// <returns>1 đối tượng đã được sửa</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public int Update(MISAEntity entity)
         {
             using (dbConnection = new MySqlConnection(connectionString))
@@ -79,6 +109,12 @@ namespace MISA.CukCuk.Infrastructute.Repository
             }
         }
 
+        /// <summary>
+        /// Xóa 1 đối tượng
+        /// </summary>
+        /// <param name="entityId">Mã ID cảu đối tượng</param>
+        /// <returns>Thông báo xóa thành công</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public int Delete(Guid entityId)
         {
             using (dbConnection = new MySqlConnection(connectionString))
@@ -91,6 +127,8 @@ namespace MISA.CukCuk.Infrastructute.Repository
             }
         }
 
+
+        //TODO: chưa cần dùng đến --- CheckCode dùng chung
         /// <summary>
         /// Check trùng mã đối tượng
         /// </summary>

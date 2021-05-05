@@ -21,27 +21,57 @@ namespace MISA.CukCuk.Core.Service
             _baseRepository = baseRepository;
         }
 
+        /// <summary>
+        /// Lấy danh sách tất cả các đối tượng
+        /// </summary>
+        /// <returns>Mảng danh sách đối tượng</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public IEnumerable<MISAEntity> GetAll()
         {
             return _baseRepository.GetAll();
         }
 
+        /// <summary>
+        /// Lấy 1 đối tượng theo ID
+        /// </summary>
+        /// <param name="entityId">Mã ID của đối tượng</param>
+        /// <returns>1 đối tượng có id là entityId</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public MISAEntity GetById(Guid entityId)
         {
             return _baseRepository.GetById(entityId);
         }
 
+        /// <summary>
+        /// Phân trang đối tượng
+        /// </summary>
+        /// <param name="pageSize">số đối tượng trên 1 trang</param>
+        /// <param name="pageIndex">Trang số bao nhiêu</param>
+        /// <returns>Mảng danh sách đối tượng</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public IEnumerable<MISAEntity> GetEntityFilter(int pageSize, int pageIndex)
         {
             return _baseRepository.GetEntityFilter(pageSize, pageIndex);
         }
 
+        /// <summary>
+        /// Thêm mới 1 đối tượng
+        /// </summary>
+        /// <param name="entity">Đối tượng cần thêm mới</param>
+        /// <returns>số dòng trong bảng trong DB bị ảnh hưởng</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public int Insert(MISAEntity entity)
         {
             Validate(entity, HTTPType.POST);
             return _baseRepository.Insert(entity);
         }
 
+        /// <summary>
+        /// Validate dữ liệu dùng chung
+        /// </summary>
+        /// <param name="entity">đối tượng truyền vào</param>
+        /// <param name="http">Phương thức POST or PUT</param>
+        /// Created By: NXCHIEN 29/04/2021
         private void Validate(MISAEntity entity, HTTPType http)
         {
             // Lấy ra tất cả property của đối tượng
@@ -102,20 +132,40 @@ namespace MISA.CukCuk.Core.Service
             //    throw new CustomExceptions("Mã khách hàng đã tồn tại trên hệ thống!");
             //}
 
+
+            // Validate dữ liệu riêng tường đối tượng
             CustomValidate(entity, http);
         }
 
+        /// <summary>
+        /// Validate dữ liệu riêng tường đối tượng
+        /// </summary>
+        /// <param name="entity">đối tượng truyền vào</param>
+        /// <param name="http">Phương thức POST or PUT</param>
+        /// Created By: NXCHIEN 29/04/2021
         protected virtual void CustomValidate(MISAEntity entity, HTTPType http)
         {
 
         }
 
+        /// <summary>
+        /// Sửa 1 đối tượng 
+        /// </summary>
+        /// <param name="entity">Đối tượng cần sửa</param>
+        /// <returns>1 đối tượng đã được sửa</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public int Update(MISAEntity entity)
         {
             Validate(entity, HTTPType.PUT);
             return _baseRepository.Update(entity);
         }
 
+        /// <summary>
+        /// Xóa 1 đối tượng
+        /// </summary>
+        /// <param name="entityId">Mã ID cảu đối tượng</param>
+        /// <returns>Thông báo xóa thành công</returns>
+        /// Created By: NXCHIEN 29/04/2021
         public int Delete(Guid entityId)
         {
             return _baseRepository.Delete(entityId);
