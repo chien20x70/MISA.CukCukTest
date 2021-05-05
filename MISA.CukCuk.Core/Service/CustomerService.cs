@@ -1,30 +1,26 @@
-﻿using MISA.CukCuk.Core.Entities;
-using MISA.CukCuk.Core.Enums;
-using MISA.CukCuk.Core.Exceptions;
-using MISA.CukCuk.Core.Interfaces.Repository;
-using MISA.CukCuk.Core.Interfaces.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿    using MISA.CukCuk.Core.Entities;
+    using MISA.CukCuk.Core.Enums;
+    using MISA.CukCuk.Core.Exceptions;
+    using MISA.CukCuk.Core.Interfaces.Repository;
+    using MISA.CukCuk.Core.Interfaces.Service;
 
 namespace MISA.CukCuk.Core.Service
 {
-    public class CustomerService: BaseService<Customer>, ICustomerService
+
+    public class CustomerService : BaseService<Customer>, ICustomerService
     {
         ICustomerRepository _customerRepository;
-        public CustomerService(ICustomerRepository customerRepository) :base(customerRepository)
+        public CustomerService(ICustomerRepository customerRepository) : base(customerRepository)
         {
             _customerRepository = customerRepository;
         }
 
         /// <summary>
-        /// Validate dữ liệu riêng tường đối tượng
+        /// Validate dữ liệu riêng tường đối tượng.
         /// </summary>
-        /// <param name="customer">đối tượng truyền vào</param>
-        /// <param name="http">Phương thức Post or PUT</param>
-        /// Created By: NXCHIEN 29/04/2021
+        /// <param name="customer">đối tượng truyền vào.</param>
+        /// <param name="http">Phương thức Post or PUT.</param>
+        /// CreatedBy: NXChien (28/04/2021)
         protected override void CustomValidate(Customer customer, HTTPType http)
         {
             // Khởi tạo giá trị và gán giá trị

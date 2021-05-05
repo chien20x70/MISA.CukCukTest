@@ -17,7 +17,7 @@ namespace MISA.CukCukTest.Base.Controllers
         ICustomerService _customerService;
         ICustomerRepository _customerRepository;
         public CustomerController(ICustomerService customerService,
-        ICustomerRepository customerRepository):base(customerRepository, customerService)
+        ICustomerRepository customerRepository) : base(customerRepository, customerService)
         {
             _customerRepository = customerRepository;
             _customerService = customerService;

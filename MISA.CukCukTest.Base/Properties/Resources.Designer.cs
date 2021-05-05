@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MISA.CukCuk.Core.Properties
+namespace MISA.CukCukTest.Base.Properties
 {
     /// <summary>
     /// A strongly-typed resource class, for looking up localized strings, etc.
@@ -16,7 +16,7 @@ namespace MISA.CukCuk.Core.Properties
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources
+    internal class Resources
     {
         /// <summary>
         /// Defines the resourceMan.
@@ -41,13 +41,13 @@ namespace MISA.CukCuk.Core.Properties
         /// Returns the cached ResourceManager instance used by this class....
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager
+        internal static global::System.Resources.ResourceManager ResourceManager
         {
             get
             {
                 if (object.ReferenceEquals(resourceMan, null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MISA.CukCuk.Core.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MISA.CukCukTest.Base.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,7 +60,7 @@ namespace MISA.CukCuk.Core.Properties
         ///   resource lookups using this strongly typed resource class....
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture
+        internal static global::System.Globalization.CultureInfo Culture
         {
             get
             {
@@ -73,26 +73,14 @@ namespace MISA.CukCuk.Core.Properties
         }
 
         /// <summary>
-        /// Gets the Msg_Code_Exist
-        /// Looks up a localized string similar to Mã khách hàng đã tồn tại trên hệ thống!....
+        /// Gets the Msg_Delete_Entity
+        /// Looks up a localized string similar to Xóa thành công....
         /// </summary>
-        public static string Msg_Code_Exist
+        internal static string Msg_Delete_Entity
         {
             get
             {
-                return ResourceManager.GetString("Msg_Code_Exist", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        /// Gets the Msg_Phone_Exist
-        /// Looks up a localized string similar to Số điện thoại đã tồn tại trên hệ thống!....
-        /// </summary>
-        public static string Msg_Phone_Exist
-        {
-            get
-            {
-                return ResourceManager.GetString("Msg_Phone_Exist", resourceCulture);
+                return ResourceManager.GetString("Msg_Delete_Entity", resourceCulture);
             }
         }
     }

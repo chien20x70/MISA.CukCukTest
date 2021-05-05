@@ -5,28 +5,25 @@ using MISA.CukCuk.Core.Enums;
 using MISA.CukCuk.Core.Interfaces.Repository;
 using MySqlConnector;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Infrastructute.Repository
 {
-    public class CustomerRepository: BaseRepository<Customer>, ICustomerRepository
-    {
-        //IConfiguration _configuration;
-        public CustomerRepository(IConfiguration configuration): base(configuration)
+    public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
+    {      
+        public CustomerRepository(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
         }
 
         /// <summary>
-        /// Check CustomerCode đã tồn tại hay chưa
+        /// Check CustomerCode đã tồn tại hay chưa.
         /// </summary>
-        /// <param name="customerCode">Mã khách hàng</param>
-        /// <returns>true or false</returns>
-        /// CREATED BY: NXCHIEN 27/04/2021
+        /// <param name="customerCode">Mã khách hàng.</param>
+        /// <param name="customerId">The customerId<see cref="Guid"/>.</param>
+        /// <param name="http">The http<see cref="HTTPType"/>.</param>
+        /// <returns>true or false.</returns>
+        /// CreatedBy: NXChien (28/04/2021)
         public bool CheckCustomerCodeExist(string customerCode, Guid customerId, HTTPType http)
         {
             using (dbConnection = new MySqlConnection(connectionString))
@@ -38,7 +35,7 @@ namespace MISA.CukCuk.Infrastructute.Repository
                     sqlCommandDuplicate = "Proc_CheckCustomerCodeExists";
                     parameters.Add("@m_CustomerCode", customerCode);
                 }
-                else if(http == HTTPType.PUT)  //put
+                else if (http == HTTPType.PUT)  //put
                 {
                     sqlCommandDuplicate = "Proc_H_CheckCustomerCodeExists";
                     parameters.Add("@customerCode", customerCode);
@@ -51,11 +48,11 @@ namespace MISA.CukCuk.Infrastructute.Repository
         }
 
         /// <summary>
-        /// Kiểm tra số điện thoại đã tồn tại trong DB chưa
+        /// Kiểm tra số điện thoại đã tồn tại trong DB chưa.
         /// </summary>
-        /// <param name="phoneNumber"></param>
-        /// <returns></returns>
-        /// CREATED BY: NXCHIEN 27/04/2021
+        /// <param name="phoneNumber">.</param>
+        /// <returns>.</returns>
+        /// CreatedBy: NXChien (28/04/2021)
         public bool CheckPhoneNumberExist(string phoneNumber)
         {
             using (dbConnection = new MySqlConnection(connectionString))
